@@ -214,6 +214,12 @@ func (v *Viddy) diffQueueHandler() {
 				return
 			}
 
+			if s.diffAdditionCount == 0 && s.diffDeletionCount == 0 {
+				delete(v.historyRows, s.id)
+				v.historyView.RemoveRow(0)
+				return
+			}
+
 			r.addition.SetText("+" + strconv.Itoa(s.diffAdditionCount))
 			r.deletion.SetText("-" + strconv.Itoa(s.diffDeletionCount))
 		}()
